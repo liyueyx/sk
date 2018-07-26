@@ -1,0 +1,53 @@
+.el-submenu__title, .el-menu-item{
+    font-size: 16px;
+    color: #333333;
+}
+.header .el-submenu__title {
+    font-size: 16px;
+    color: #333333;
+}
+.el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu .el-submenu__title{
+    color: #333333;
+}
+.el-menu--horizontal>.el-menu-item,
+.el-menu--horizontal>.el-submenu .el-submenu__title{
+    color: #333333;
+}
+
+
+.el-menu--popup .el-menu-item {
+    font-size: 14px;
+}
+/*.el-menu--horizontal .el-menu-item:not(.is-disabled):focus,*/
+.el-menu--horizontal .el-menu-item:not(.is-disabled):hover{
+    color: #f66626;
+}
+.el-menu--collapse .el-menu .el-submenu, .el-menu--popup{
+    min-width: 90px;
+    text-align: center;
+}
+.el-menu--horizontal>.el-submenu.fr{
+    float: right;
+}
+.login .el-button{
+    font-size: 16px;
+    line-height: 40px;
+}
+.el-dialog{
+    border-radius: 6px;
+}
+.el-dialog__header {
+    padding: 20px 50px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f66626;
+}
+.el-dialog__body {
+    padding: 30px 50px 0;
+}
+.el-dialog__footer{
+    text-align: center;
+}
+
+.el-menu--horizontal>.el-submenu.is-active .el-submenu__title{
+    border-bottom: none;
+}
