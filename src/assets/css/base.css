@@ -16,3 +16,8 @@ img {
 .fr{
     float: right;
 }
+.content{
+    width: 1100px;
+    margin: 0 auto;
+    padding: 10px 15px;
+}

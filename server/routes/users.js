@@ -32,7 +32,7 @@ router.post('/login', (req, res, next) => {
       let user = {
         id:result.id,
         username:result.username,
-        level:result.level
+        level:result.user_level
       }
       req.session.userInfo = user;
       res.json({status:'success', msg:'', result:user});
@@ -60,14 +60,26 @@ router.get('/loginout', (req, res, next) => {
  * 注册
  * */
 router.post('/register', (req, res, next) => {
-
+  userDao.addUser(req.body.telephone, md5(req.body.pass), (err, result) =>{
+    if(err){
+      res.json({status:'error',msg:'注册失败'});
+      return;
+    }
+    res.json({status:'success',msg:''});
+  });
 })
 /**
  * 用户列表
  * */
 router.get('/list', (req, res, next) => {
-  userDao.getUserList((err,rows)=>{
-    res.json({status:'success',msg:'',result:{rows:rows}});
+  let params = {
+    pageInfo:{
+      pageNum:req.body.pageNum ? req.body.pageNum : 1,
+      pageSize:req.body.pageSize ? req.body.pageSize : 10
+    }
+  }
+  userDao.getUserListByCondition(params,(err,rows)=>{
+    res.json({status:'success',msg:'',result:rows});
   });
 })
 /**

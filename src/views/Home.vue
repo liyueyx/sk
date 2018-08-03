@@ -1,8 +1,11 @@
 <template>
    <div>
       <nav-header></nav-header>
-      <el-button @click="test">测试</el-button>
-      <p>{{msg}}</p>
+      <div class="content">
+         <el-button @click="test">测试</el-button>
+         <p>{{msg}}</p>
+      </div>
+
    </div>
 </template>
 

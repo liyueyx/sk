@@ -22,6 +22,7 @@ db.query = (sql, param={}, callback) => {
     return;
   }
   pool.query(sql, param, (err, rows, fields) => {
+
     if (err) {
       console.log(err);
       callback(err, null);

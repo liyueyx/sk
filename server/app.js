@@ -1,17 +1,17 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var createError = require('http-errors');
-var ejs = require('ejs')
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const createError = require('http-errors');
+const ejs = require('ejs')
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -109,6 +109,7 @@ var noIntercept = (url)=>{
     '/user/login',
     '/user/logout',
     '/user/checklogin',
+    '/user/register'
 
   ];
   if(addr.indexOf(url) != -1){

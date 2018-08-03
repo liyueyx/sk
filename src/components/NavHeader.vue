@@ -24,29 +24,32 @@
                <template slot="title">发现</template>
                <el-menu-item index="7-1">最新动态</el-menu-item>
                <el-menu-item index="7-2">算客会员</el-menu-item>
-               <el-menu-item index="7-2">企业VIP</el-menu-item>
-               <el-menu-item index="7-2">算客经纪人</el-menu-item>
-               <el-menu-item index="7-2">算客大礼包</el-menu-item>
-               <el-menu-item index="7-2">我的权限</el-menu-item>
-               <el-menu-item index="7-2"></el-menu-item>
+               <el-menu-item index="7-3">企业VIP</el-menu-item>
+               <el-menu-item index="7-4">算客经纪人</el-menu-item>
+               <el-menu-item index="7-5">算客大礼包</el-menu-item>
+               <el-menu-item index="7-6">我的权限</el-menu-item>
+               <el-menu-item index="7-7"></el-menu-item>
             </el-submenu>
-            <el-submenu index="8" class="fr" v-if="isLogin">
+            <el-submenu index="8" v-if="level>100">
+               <template slot="title">审核</template>
+               <el-menu-item index="8-1">项目</el-menu-item>
+               <el-menu-item index="8-2"><router-link to="/userManager">用户</router-link></el-menu-item>
+            </el-submenu>
+            <el-submenu index="9" class="fr" v-if="isLogin">
                <template slot="title">
                   <img src="../assets/img/i.png" alt="" class="head-portrait">
                </template>
-               <el-menu-item index="7-1">个人中心</el-menu-item>
-               <el-menu-item index="7-1" @click="loginout">退出登录</el-menu-item>
+               <el-menu-item index="9-1">个人中心</el-menu-item>
+               <el-menu-item index="9-2" @click="loginout">退出登录</el-menu-item>
             </el-submenu>
             <div class="login fr" v-if="!isLogin">
                <!--<el-button type="text" @click="loginout">退出</el-button>-->
-               <el-button type="text" size="medium" @click="dialogFormVisible = true">登录</el-button>
-               <el-button type="text" @click="register">注册</el-button>
+               <el-button type="text" size="medium" @click="dialogLoginVisible = true">登录</el-button>
+               <el-button type="text" @click="dialogRegisterVisible = true">注册</el-button>
             </div>
          </el-menu>
       </div>
-
-      <!--<el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>-->
-      <el-dialog title="手机登录" width="500px" :visible.sync="dialogFormVisible">
+      <el-dialog title="用户登录" width="500px" :visible.sync="dialogLoginVisible">
          <el-form>
             <el-form-item>
                <el-input placeholder="请输入手机号" v-model="login.username"></el-input>
@@ -59,26 +62,42 @@
             <button @click="okClick" class="okBtn">登录</button>
          </div>
       </el-dialog>
-      <el-dialog title="手机注册" width="500px" :visible.sync>
-
+      <el-dialog title="手机注册" width="500px" :visible.sync="dialogRegisterVisible">
+         <el-form>
+            <el-form-item>
+               <el-input placeholder="请输入手机号" v-model="register.telephone"></el-input>
+            </el-form-item>
+            <el-form-item>
+               <el-input type="password" placeholder="请输入密码" v-model="register.pass"></el-input>
+            </el-form-item>
+         </el-form>
+         <div slot="footer" class="dialog-footer">
+            <button @click="registerClick" class="okBtn">注册</button>
+         </div>
       </el-dialog>
-
    </div>
 </template>
 
 <script>
   import '../assets/css/nav-header.css'
   import { mapGetters } from 'vuex'
+  import ElSubmenu from '../../node_modules/element-ui/packages/menu/src/submenu'
 
   export default {
+    components: {ElSubmenu},
     name: 'NavHeader',
     data () {
       return {
         msg: '',
-        dialogFormVisible: false,
+        dialogLoginVisible: false,
+        dialogRegisterVisible: false,
         login: {
           username: '',
-          pass: '',
+          pass: ''
+        },
+        register: {
+          telephone: '',
+          pass: ''
         }
       }
     },
@@ -87,7 +106,7 @@
     },
     methods: {
       okClick: function() { //登录方法
-        var param = {
+        let param = {
           username: this.login.username,
           pass: this.login.pass
         };
@@ -95,7 +114,7 @@
           if (res.data.status && res.data.status === 'success') {
             this.login.username = '';
             this.login.pass = '';
-            this.dialogFormVisible = false;
+            this.dialogLoginVisible = false;
             this.$store.commit('updateUser', res.data.result);
             this.$message({message: '登录成功', type: 'success', showClose: true});
           }else if (res.data.status && res.data.status ==='error'){
@@ -106,11 +125,30 @@
 
         }).catch( err => this.error(err) );
       },
-      register: function () { //注册方法
-        console.log('into');
-        this.$axios.get('/user/register',{index:Math.random()}).then((res) => {
+      registerClick: function () { //注册方法
+        let param = {
+          telephone:this.register.telephone,
+          pass:this.register.pass
+        }
+        this.$axios.post('/user/register', param).then((res) => {
+          if(res.data){
+            let data = res.data;
+            if(data.status === 'success'){
+              this.dialogRegisterVisible = false;
+              this.$message({message: '注册成功', type: 'success', showClose: true});
+              this.register.telephone = '';
+              this.register.pass = '';
+              setTimeout(()=>{
+                this.dialogLoginVisible = true;
+              },500);
+            }else if(data.status === 'error'){
+              this.$message({message: data.msg, type: 'error', showClose:true});
+            }
+          }else{
+            this.$message({message:'服务内部错误!', type: 'error', showClose:true});
+          }
 
-          console.log('register result method:' + JSON.stringify(res));
+
 
         }).catch( err => this.error(err) );
       },
