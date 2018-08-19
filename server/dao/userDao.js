@@ -123,6 +123,35 @@ module.exports = {
       if(callback) callback(err,rows);
     })
   },
+  /**
+   * 用户修改
+   * id:int   要修改的用户id
+   * param:Object   要修改的内容{name:'test',age:18}
+   * */
+  updateUser:(id,param,cb)=>{
+    let sql = 'update users set ';
+
+  },
+  /**
+   * 添加认证
+   * id:int   用户id
+   * imgUrls:String   图片的url地址数据
+   * */
+  updateUrl:(id,imgUrls,cb)=>{
+    //let sql = 'update users set certificate=? where id=?';
+    let sql = 'update users set certificate="'+ imgUrls +'" where id=' + id;
+    console.log(sql);
+    db.query(sql, (err, rows)=>{
+      if(err){
+        if(cb) cb(err,null);
+        return;
+      }
+      if(cb) cb(err,rows);
+    })
+
+  },
+
+  /**测试*/
   test:(id,callback)=>{
     /*根据id查询用户信息*/
     /*let sql = 'select * from users where id=?';

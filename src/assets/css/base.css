@@ -4,20 +4,34 @@ html, body, ul, li, ol, p, h1, h2, h3, h4, h5, h6, a {
     list-style: none;
     text-decoration: none;
     color: #333333;
-    font-family:"微软雅黑";
+    font-family: "微软雅黑";
 }
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, input, button, textarea, p, blockquote, th, td, form{
+    margin: 0;
+    padding:0;
+}
+
+address, cite, dfn, em, var, i {
+    font-style: normal;
+}
+
 img {
     vertical-align: middle;
 }
 
-.fl{
-    float:left
+.fl {
+    float: left
 }
-.fr{
+
+.fr {
     float: right;
 }
-.content{
+
+.content {
     width: 1100px;
     margin: 0 auto;
     padding: 10px 15px;
+}
+address, cite, dfn, em, var, i {
+    font-style: normal;
 }

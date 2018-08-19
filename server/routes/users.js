@@ -1,7 +1,30 @@
 const express = require('express');
 const router = express.Router();
-const { md5 } = require('../utils');
+const { md5, getUploadDirName} = require('../utils');
 const userDao = require('../dao/userDao');
+const multer = require('multer');
+const fs = require('fs');
+
+var storage = multer.diskStorage({
+  destination:(req, file, cb) => {
+    let dist = '/public/uploads/' + getUploadDirName();
+    if (!fs.existsSync(dist)) {
+      fs.mkdirSync(dist);
+    }
+    cb(null, dist);
+  },
+  filename:(req, file, cb) => {
+    const fileformat = (file.originalname).split('.');
+    //cb(null, file.fieldname+'-'+Date.now()+'.'+fileformat[fileformat.length-1]);
+    cb(null, Date.now()+'.'+fileformat[fileformat.length-1]);
+  }
+});
+
+//const upload = multer({ dest: 'public/uploads' });
+
+const upload = multer({ storage: storage  });
+
+
 
 
 /**
@@ -40,7 +63,7 @@ router.post('/login', (req, res, next) => {
       res.json({status:'error', msg:'用户名或密码错误'});
     }
   });
-})
+});
 
 /**
 * 检查登录
@@ -55,7 +78,7 @@ router.get('/checklogin',(req, res, next) => {
 router.get('/loginout', (req, res, next) => {
   req.session.userInfo = null //
   res.json({status: 'success', msg: ''})
-})
+});
 /**
  * 注册
  * */
@@ -67,7 +90,7 @@ router.post('/register', (req, res, next) => {
     }
     res.json({status:'success',msg:''});
   });
-})
+});
 /**
  * 用户列表
  * */
@@ -81,14 +104,44 @@ router.get('/list', (req, res, next) => {
   userDao.getUserListByCondition(params,(err,rows)=>{
     res.json({status:'success',msg:'',result:rows});
   });
-})
+});
 /**
  * 用户中心
  * */
 router.get('/personalCenter',(req,res,next)=>{
 
-})
+});
 
+/**
+* 用户上传认证信息
+* */
+router.post('/upload/authentication',  upload.single('imageFile'), (req,res,next)=>{
+  let id = req.session.userInfo.id;
+  let promise = new Promise((resolve,reject)=>{
+    userDao.getUserByID(id,(err,rows)=>{
+      if(err){
+        reject(err);
+      }
+      resolve(rows[0].certificate);
+    });
+  });
+  promise.then(data=>{
+    let imgUrls = '';
+    imgUrls = data ? data+',' : '';
+    userDao.updateUrl(id,imgUrls+req.file.path.replace(/\\/g,'\\\\'),err=>{
+      if(err){
+        res.json({status:'error',msg:'插入数据失败'});
+      }else{
+        res.json({status:'success',msg:''});
+      }
+
+    });
+  },err=>{});
+  //let urls = [];
+  //urls.push(req.file.path);
+
+  //res.json({status:'success',msg:''});
+});
 
 /**
  * 测试
@@ -114,5 +167,6 @@ router.get('/test', (req, res, next) => {
   /*userDao.getUserByName('admin',(err,rows) => {
     res.json({status:'success'});
   })*/
-})
+});
 module.exports = router;
+

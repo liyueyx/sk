@@ -23,8 +23,6 @@ export default new Vuex.Store({
   },
   mutations:{
     updateUser:(state,user) => {
-      console.log('this state:'+state);
-      console.log('this user:'+ JSON.stringify(user));
       state.user.username = user.username;
       state.user.level = user.level;
     }

@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import ProjectList from '@/views/ProjectList'
 import Home from '@/views/Home'
-//import userRouterArr from './user.js'
-import UserManager from '@/views/UserManager'
+import Test from '@/views/test'
+import userRouterArr from './user.js'
+
 
 Vue.use(Router)
 
@@ -20,10 +21,10 @@ export default new Router({
       component: ProjectList
     },
     {
-      path: '/usermanager',
-      name: 'UserManager',
-      component: UserManager
-    }
-    //...userRouterArr
+      path: '/test',
+      name: 'Test',
+      component: Test
+    },
+    ...userRouterArr
   ]
 })

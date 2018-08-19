@@ -10,6 +10,7 @@
                <template slot="title">发布</template>
                <el-menu-item index="1-1">发布项目</el-menu-item>
                <el-menu-item index="1-2">委托项目</el-menu-item>
+               <el-menu-item index="1-3"><router-link to="/test">Test</router-link></el-menu-item>
             </el-submenu>
             <el-menu-item index="2">项目</el-menu-item>
             <el-submenu index="3">
@@ -39,7 +40,7 @@
                <template slot="title">
                   <img src="../assets/img/i.png" alt="" class="head-portrait">
                </template>
-               <el-menu-item index="9-1">个人中心</el-menu-item>
+               <el-menu-item index="9-1"><router-link to="/personalCenter">个人中心</router-link></el-menu-item>
                <el-menu-item index="9-2" @click="loginout">退出登录</el-menu-item>
             </el-submenu>
             <div class="login fr" v-if="!isLogin">
@@ -59,7 +60,7 @@
             </el-form-item>
          </el-form>
          <div slot="footer" class="dialog-footer">
-            <button @click="okClick" class="okBtn">登录</button>
+            <el-button @click="okClick" class="okBtn" :loading="inTheLogin">登录</el-button>
          </div>
       </el-dialog>
       <el-dialog title="手机注册" width="500px" :visible.sync="dialogRegisterVisible">
@@ -82,15 +83,19 @@
   import '../assets/css/nav-header.css'
   import { mapGetters } from 'vuex'
   import ElSubmenu from '../../node_modules/element-ui/packages/menu/src/submenu'
+  import ElButton from '../../node_modules/element-ui/packages/button/src/button'
 
   export default {
-    components: {ElSubmenu},
+    components: {
+      ElButton,
+      ElSubmenu},
     name: 'NavHeader',
     data () {
       return {
         msg: '',
-        dialogLoginVisible: false,
-        dialogRegisterVisible: false,
+        dialogLoginVisible: false,  //是否显示登录窗口
+        dialogRegisterVisible: false,  //是否显示注册窗口
+        inTheLogin:false,  //登录中状态
         login: {
           username: '',
           pass: ''
@@ -106,11 +111,13 @@
     },
     methods: {
       okClick: function() { //登录方法
+        this.inTheLogin = true;
         let param = {
           username: this.login.username,
           pass: this.login.pass
         };
         this.$axios.post('/user/login', param).then((res) => {
+          this.inTheLogin = false;
           if (res.data.status && res.data.status === 'success') {
             this.login.username = '';
             this.login.pass = '';
@@ -163,6 +170,7 @@
         }).catch( err => this.error());
       },
       checklogin: function(){
+        console.log(this.$axios.defaults.baseURL);
         this.$axios.get('/user/checklogin',{index:Math.random()}).then((res) => {
           let data = res.data
           if(data.status && data.status === 'success'){
@@ -187,7 +195,7 @@
       position: fixed;
       width: 100%;
       height: 70px;
-      padding: 11px 0;
+      padding: 5px 0 0;
       background: white;
       position: relative;
       top: 0;
@@ -195,6 +203,8 @@
       font-size: 16px;
       min-width: 1100px;
       font-size: 16px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+      min-width: 1100px;
    }
 
    .header .w {
@@ -237,7 +247,6 @@
       width: 200px;
       margin-top: 20px;
       height: 50px;
-      line-height: 50px;
       border-radius: 3px;
       font-size: 14px;
    }

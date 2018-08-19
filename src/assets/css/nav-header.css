@@ -19,6 +19,9 @@
     font-size: 14px;
 }
 /*.el-menu--horizontal .el-menu-item:not(.is-disabled):focus,*/
+.el-menu--horizontal {
+    border: none;
+}
 .el-menu--horizontal .el-menu-item:not(.is-disabled):hover{
     color: #f66626;
 }

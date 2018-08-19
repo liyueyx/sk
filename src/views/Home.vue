@@ -6,6 +6,8 @@
          <p>{{msg}}</p>
       </div>
 
+
+
    </div>
 </template>
 
@@ -14,7 +16,17 @@
   export default {
     data () {
       return {
-        msg: 'Welcome to 算客'
+        msg: 'Welcome to 算客',
+        upload_url: 'aaa',       // 随便填一个，但一定要有
+        uploadForm: new FormData(),   // 一个formdata
+        rules: {},     // 用到的规则
+        newform: {
+          expName: '',
+          groupName: '',
+          expSn: '',
+          subGroupName: '',
+          expvmDifficulty: 1
+        }
       }
     },
     methods: {
@@ -23,6 +35,54 @@
         this.$axios.get('/user/test',param).then((res)=>{
           console.log(JSON.stringify(res));
         });
+      },
+      newSubmitForm () {
+        this.$refs['newform'].validate((valid) => {
+          if (valid) {
+            this.uploadForm.append('expName', this.newform.expName);
+            this.uploadForm.append('expSn', this.newform.expSn);
+            //this.uploadForm.append('groupId', this.newgroupId);
+            //this.uploadForm.append('subGroupId', this.newsubgroupId);
+            this.uploadForm.append('expvmDifficulty', this.newform.expvmDifficulty);
+            /*newExp(this.uploadForm).then(res => {
+              if (res.code === 400) {
+                this.$message.error(res.error)
+              } else if (res.code === 200) {
+                this.$message.success('上传成功！')
+
+              }
+            })*/
+            this.$axios.post('/user/upload',this.uploadForm).then(res => {
+              if (res.code === 400) {
+                this.$message.error(res.error)
+              } else if (res.code === 200) {
+                this.$message.success('上传成功！')
+              }
+            });
+
+
+
+            this.$refs.uploadhtml.submit()   // 提交时触发了before-upload函数
+            this.$refs.uploadfile.submit()
+            this.$refs.uploadvideo.submit()
+
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
+      },
+      newHtml (file) {   // before-upload
+        this.uploadForm.append('html', file)
+        return false
+      },
+      newFiles (file) {
+        this.uploadForm.append('file[]', file)
+        return false
+      },
+      newVideo (file) {
+        this.uploadForm.append('video', file)
+        return false
       }
     },
     components:{

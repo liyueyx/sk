@@ -3,7 +3,7 @@
  */
 import emitter from './Emitter'
 import axios from 'axios';
-axios.defaults.withCredentials=true
+axios.defaults.withCredentials=true;
 axios.defaults.timeout = 1000*60*30;
 axios.defaults.baseURL ='';
 //axios.defaults.baseURL ='http:127.0.0.1:3000';
