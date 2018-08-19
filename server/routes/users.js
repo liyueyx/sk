@@ -142,6 +142,28 @@ router.post('/upload/authentication',  upload.single('imageFile'), (req,res,next
 
   //res.json({status:'success',msg:''});
 });
+/**
+ * 获取用户信息
+ * */
+router.get('/userInfo',(req,res,next)=>{
+  userDao.getUserByID(req.session.userInfo.id,(err,rows)=>{
+    let result = (rows && rows.length>0) ? rows[0] : [];
+    err ? res.json({status:'error',msg:'获取用户失败'}) : res.json({status:'success',result:result});
+  });
+});
+/**
+ * 修改用户基本信息
+ * */
+router.put('/userInfo', (req, res, next)=>{
+  let params = [];
+  params.push(req.body.nickname);
+  params.push(req.body.province);
+  params.push(req.body.email);
+  console.log(params);
+  userDao.updateUserInfo(req.session.userInfo.id,params,(err,rows)=>{
+    err ? res.json({status:'error',msg:'修改用户基本信息失败'}) : res.json({status:'success'});
+  });
+});
 
 /**
  * 测试

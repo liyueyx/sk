@@ -22,6 +22,7 @@
 </template>
 
 <script>
+  import NavHeader from '../components/NavHeader.vue'
   export default {
     data () {
       return {
@@ -40,6 +41,7 @@
       }
     },
     components:{
+      NavHeader
     },
   }
 </script>

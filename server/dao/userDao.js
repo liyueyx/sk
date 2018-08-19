@@ -85,13 +85,18 @@ module.exports = {
     });
 
   },
-
+  /**
+   * 根据用户ID获取用户信息
+   * */
   getUserByID: (id, callback) => {
     let sql = 'select * from users where id=?';
     db.query(sql, [id], (err, rows) => {
       if(callback) callback(err, rows);
     })
   },
+  /**
+   * 根据用户名称获取用户信息
+   * */
   getUserByName: (username, callback) => {
     let sql = 'select * from users where username=?';
     db.query(sql, [username], (err, rows) => {
@@ -138,10 +143,9 @@ module.exports = {
    * imgUrls:String   图片的url地址数据
    * */
   updateUrl:(id,imgUrls,cb)=>{
-    //let sql = 'update users set certificate=? where id=?';
-    let sql = 'update users set certificate="'+ imgUrls +'" where id=' + id;
-    console.log(sql);
-    db.query(sql, (err, rows)=>{
+    let sql = 'update users set certificate=? where id=?';
+    //let sql = 'update users set certificate="'+ imgUrls +'" where id=' + id;
+    db.query(sql, [imgUrls,id], (err, rows)=>{
       if(err){
         if(cb) cb(err,null);
         return;
@@ -149,6 +153,19 @@ module.exports = {
       if(cb) cb(err,rows);
     })
 
+  },
+  /**
+   * 修改用户基本信息
+   * */
+  updateUserInfo:(id,params,cb)=>{
+    let sql = 'update users set nickname=?,province=?,email=? where id=?';
+    db.query(sql, [...params,id],(err, rows)=>{
+      if(err){
+        if(cb) db(err,null);
+        return;
+      }
+      if(cb) cb(err,rows);
+    });
   },
 
   /**测试*/

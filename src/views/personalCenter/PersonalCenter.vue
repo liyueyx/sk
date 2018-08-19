@@ -40,7 +40,8 @@
                <div class="nav">
                   <dl>
                      <dt class="nav-ico2"><i class="el-icon-tickets"></i>基本信息</dt>
-                     <dd><a href="/my/info">修改基本信息</a></dd>
+                     <dd><a href="javascript:void(0)"><router-link to="/personalCenter/editInfo">修改基本信息
+                     </router-link></a></dd>
                      <dd><a href="/users/edit">修改密码</a></dd>
                      <dd><a href="/person_idens/new">实名认证</a></dd>
                      <dd><a href="/messages">我的消息</a></dd>
@@ -62,7 +63,7 @@
 
             </el-aside>
             <el-main>
-               主要窗口
+               <router-view></router-view>
             </el-main>
          </el-container>
       </div>
