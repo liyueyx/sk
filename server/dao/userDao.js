@@ -95,11 +95,11 @@ module.exports = {
     })
   },
   /**
-   * 根据用户名称获取用户信息
+   * 根据手机获取用户信息
    * */
-  getUserByName: (username, callback) => {
-    let sql = 'select * from users where username=?';
-    db.query(sql, [username], (err, rows) => {
+  getUserByTelephone: (telephone, callback) => {
+    let sql = 'select * from users where telephone=?';
+    db.query(sql, [telephone], (err, rows) => {
       if(err){
         if(callback) callback(err,null);
         return;
@@ -118,8 +118,8 @@ module.exports = {
    * pass:string 用户密码
    * */
   addUser:(telephone, pass, callback)=>{
-    let sql = "INSERT INTO users (USERNAME,PASS,TELEPHONE) VALUES(?,?,?)";
-    let param  = [telephone,pass,telephone];
+    let sql = "INSERT INTO users (TELEPHONE,PASS) VALUES(?,?)";
+    let param  = [telephone,pass];
     db.query(sql, param, (err, rows)=>{
       if(err){
         if(callback) callback(err,null);
@@ -161,10 +161,27 @@ module.exports = {
     let sql = 'update users set nickname=?,province=?,email=? where id=?';
     db.query(sql, [...params,id],(err, rows)=>{
       if(err){
-        if(cb) db(err,null);
+        if(cb) cb(err,null);
         return;
       }
       if(cb) cb(err,rows);
+    });
+  },
+  /**
+   * 修改密码
+   * */
+  updateUserPass:(id,oldPass,newPass,cb)=>{
+    let sql = 'update users set pass=? where pass=? and id=?';
+    db.query(sql, [newPass,id,oldPass],(err, rows)=>{
+      if(err){
+        if(cb) cb(err,null);
+        return;
+      }
+      if(rows.affectedRows>0){
+        cb(err,rows);
+      }else{
+        cb(new Error('密码错误或当前帐号不存在!'),rows);
+      }
     });
   },
 

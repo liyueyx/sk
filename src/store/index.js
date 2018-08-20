@@ -12,19 +12,25 @@ export default new Vuex.Store({
   strict: debug,
   state:{
     user:{
-      username:'',
-      level:-1
+      id:'',
+      nickname:'',
+      level:-1,
+      telephone:''
     }
   },
   getters: {
-    isLogin: state => state.user.username ? true : false,
-    username: state => state.user.username,
-    level: state => state.user.level
+    isLogin: state => state.user.telephone ? true : false,
+    id: state => state.user.id,
+    nickname: state => state.user.nickname,
+    level: state => state.user.level,
+    telephone: state => state.user.telephone
   },
   mutations:{
     updateUser:(state,user) => {
-      state.user.username = user.username;
+      state.user.id = user.id;
+      state.user.nickname = user.nickname;
       state.user.level = user.level;
+      state.user.telephone = user.telephone;
     }
   }
 })

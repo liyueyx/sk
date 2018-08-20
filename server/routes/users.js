@@ -47,15 +47,16 @@ router.post('/login', (req, res, next) => {
     res.json({status: 'error', msg: '账号或密码错误'})// 若登录失败，重定向到登录页面
   }*/
 
-  userDao.getUserByName(req.body.username, (err, result) => {
+  userDao.getUserByTelephone(req.body.telephone, (err, result) => {
     if(err){
       res.json({status:'error', msg:'查询数据错误'});
     }
-    if(result &&　req.body.username === result.username && md5(req.body.pass) === result.pass){
+    if(result &&　req.body.telephone === result.telephone && md5(req.body.pass) === result.pass){
       let user = {
         id:result.id,
-        username:result.username,
-        level:result.user_level
+        nickname:result.nickname,
+        level:result.level,
+        telephone:result.telephone
       }
       req.session.userInfo = user;
       res.json({status:'success', msg:'', result:user});
@@ -162,6 +163,16 @@ router.put('/userInfo', (req, res, next)=>{
   console.log(params);
   userDao.updateUserInfo(req.session.userInfo.id,params,(err,rows)=>{
     err ? res.json({status:'error',msg:'修改用户基本信息失败'}) : res.json({status:'success'});
+  });
+});
+/**
+ * 修改密码
+ * */
+router.put('/pass', (req, res, next)=>{
+  let oldPass = md5(req.body.oldPass);
+  let newPass = md5(req.body.newPass);
+  userDao.updateUserPass(req.session.userInfo.id,oldPass,newPass,(err,rows)=>{
+    err ? res.json({status:'error',msg:err.message}) : res.json({status:'success'});
   });
 });
 

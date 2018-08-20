@@ -5,7 +5,7 @@
       </div>
       <el-form :model="form" :label-position="'right;'" label-width="80px">
          <el-form-item label="手机号:">
-            {{form.telephone}}
+            {{telephone}}
          </el-form-item>
          <el-form-item label="昵称:">
             <el-input v-model="form.nickname"></el-input>
@@ -25,16 +25,22 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     data () {
       return {
          form:{
-           telephone:'',
            nickname:'',
            province:'',
            email:''
          }
       }
+    },
+    created(){
+      this.getUserInfo();
+    },
+    computed: {
+      ...mapGetters(['isLogin', 'nickname', 'level', 'telephone', 'id'])
     },
     methods:{
       onSubmit(){
@@ -60,10 +66,7 @@
       error(err){
         this.$message({message:'请求失败', type:'error', showClose:true});
       }
-    },
-    created(){
-      this.getUserInfo();
-    },
+    }
   }
 </script>
 

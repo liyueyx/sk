@@ -6,6 +6,8 @@ import Test from '@/views/test'
 import userRouterArr from './user.js'
 
 
+
+
 Vue.use(Router)
 
 export default new Router({

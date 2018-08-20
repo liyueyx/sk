@@ -53,7 +53,7 @@
       <el-dialog title="用户登录" width="500px" :visible.sync="dialogLoginVisible">
          <el-form>
             <el-form-item>
-               <el-input placeholder="请输入手机号" v-model="login.username"></el-input>
+               <el-input placeholder="请输入手机号" v-model="login.telephone"></el-input>
             </el-form-item>
             <el-form-item>
                <el-input type="password" placeholder="请输入密码" v-model="login.pass"></el-input>
@@ -97,7 +97,7 @@
         dialogRegisterVisible: false,  //是否显示注册窗口
         inTheLogin:false,  //登录中状态
         login: {
-          username: '',
+          telephone: '',
           pass: ''
         },
         register: {
@@ -107,19 +107,19 @@
       }
     },
     computed:{
-      ...mapGetters(['isLogin','username','level'])
+      ...mapGetters(['isLogin','nickname','level'])
     },
     methods: {
       okClick: function() { //登录方法
         this.inTheLogin = true;
         let param = {
-          username: this.login.username,
+          telephone: this.login.telephone,
           pass: this.login.pass
         };
         this.$axios.post('/user/login', param).then((res) => {
           this.inTheLogin = false;
           if (res.data.status && res.data.status === 'success') {
-            this.login.username = '';
+            this.login.telephone = '';
             this.login.pass = '';
             this.dialogLoginVisible = false;
             this.$store.commit('updateUser', res.data.result);
@@ -162,7 +162,7 @@
       loginout: function () { //退出登录
         this.$axios.get('/user/loginout',{index:Math.random()}).then((res) => {
           if(res.data.status && res.data.status === 'success'){
-            this.$store.commit('updateUser',{username:'',level:-1});
+            this.$store.commit('updateUser',{id:'',telephone:'',nickname:'',level:-1});
             this.$message({message:'退出成功', type:'success', showClose:true});
           }else{
             this.$message({message:'退出失败', type:'error', showClose:true});

@@ -7,9 +7,7 @@
                <div class="personal-info">
                   <div class="avatar">
                      <img src="../../assets/img/i.png" alt="">
-                     <span><i>
-                        {{username}}
-                     </i></span>
+                     <span><i>{{telephone}}</i></span>
                      <a target="_blank" href="/member_applies/new">申请成为算客</a>
                   </div>
                   <div class="employ-info">
@@ -40,13 +38,12 @@
                <div class="nav">
                   <dl>
                      <dt class="nav-ico2"><i class="el-icon-tickets"></i>基本信息</dt>
-                     <dd><a href="javascript:void(0)"><router-link to="/personalCenter/editInfo">修改基本信息
-                     </router-link></a></dd>
-                     <dd><a href="/users/edit">修改密码</a></dd>
-                     <dd><a href="/person_idens/new">实名认证</a></dd>
-                     <dd><a href="/messages">我的消息</a></dd>
-                     <dd><a href="/my/perm">我的权限</a></dd>
-                     <dd><a href="/accounts">账户中心</a></dd>
+                     <dd><router-link to="/personalCenter/editInfo">修改基本信息</router-link></dd>
+                     <dd><router-link to="/personalCenter/editPass">修改密码</router-link></dd>
+                     <dd><router-link to="/personalCenter/authentication">实名/资历 认证</router-link></dd>
+                     <dd><router-link to="/">我的消息</router-link></dd>
+                     <dd><router-link to="/">我的权限</router-link></dd>
+                     <dd><router-link to="/">账户中心</router-link></dd>
                   </dl>
                   <dl>
                      <dt class="nav-ico2"><i class="el-icon-tickets"></i>交易管理</dt>
@@ -86,7 +83,7 @@
       NavHeader
     },
     computed: {
-      ...mapGetters(['isLogin', 'username', 'level'])
+      ...mapGetters(['isLogin', 'telephone', 'level'])
     },
   }
 </script>
