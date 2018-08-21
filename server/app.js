@@ -10,6 +10,10 @@ const ejs = require('ejs')
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const router = express.Router();
+router.get('/user/test',function (req,res,next){
+  res.json({status:'success',msg:'request /user/test'});
+})
 
 const app = express();
 
@@ -78,6 +82,7 @@ app.use(function (req,res,next) {
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
