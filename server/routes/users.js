@@ -76,7 +76,7 @@ router.get('/checklogin',(req, res, next) => {
 /**
  * 退出登录
  * */
-router.get('/loginout', (req, res, next) => {
+router.get('/logout', (req, res, next) => {
   req.session.userInfo = null //
   res.json({status: 'success', msg: ''})
 });

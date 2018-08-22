@@ -41,10 +41,10 @@
                   <img src="../assets/img/i.png" alt="" class="head-portrait">
                </template>
                <el-menu-item index="9-1"><router-link to="/personalCenter">个人中心</router-link></el-menu-item>
-               <el-menu-item index="9-2" @click="loginout">退出登录</el-menu-item>
+               <el-menu-item index="9-2" @click="logout">退出登录</el-menu-item>
             </el-submenu>
             <div class="login fr" v-if="!isLogin">
-               <!--<el-button type="text" @click="loginout">退出</el-button>-->
+               <!--<el-button type="text" @click="logout">退出</el-button>-->
                <el-button type="text" size="medium" @click="dialogLoginVisible = true">登录</el-button>
                <el-button type="text" @click="dialogRegisterVisible = true">注册</el-button>
             </div>
@@ -159,8 +159,8 @@
 
         }).catch( err => this.error(err) );
       },
-      loginout: function () { //退出登录
-        this.$axios.get('/user/loginout',{index:Math.random()}).then((res) => {
+      logout: function () { //退出登录
+        this.$axios.get('/user/logout',{index:Math.random()}).then((res) => {
           if(res.data.status && res.data.status === 'success'){
             this.$store.commit('updateUser',{id:'',telephone:'',nickname:'',level:-1});
             this.$message({message:'退出成功', type:'success', showClose:true});
