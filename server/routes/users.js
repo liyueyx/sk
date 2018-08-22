@@ -179,7 +179,7 @@ router.put('/pass', (req, res, next)=>{
 /**
  * 测试
  * */
-router.post('/test3', (req, res, next) => {
+router.post('/test2', (req, res, next) => {
   /*let sql = 'select * from users';
   let param = [];
   db.query(sql, param, (err, rows, fields) => {

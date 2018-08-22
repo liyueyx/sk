@@ -130,7 +130,8 @@ var noIntercept = (url)=>{
     '/user/checklogin',
     '/user/register',
     '/user/test',
-    '/user/test1'
+    '/user/test1',
+    '/user/test2'
 
   ];
   if(addr.indexOf(url) != -1){
