@@ -14,9 +14,10 @@ const router = express.Router();
 router.get('/user/test',function (req,res,next){
   res.json({status:'success',msg:'request /user/test'});
 });
-app.use(router);
+
 
 const app = express();
+app.use(router);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
