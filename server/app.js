@@ -13,7 +13,8 @@ const usersRouter = require('./routes/users');
 const router = express.Router();
 router.get('/user/test',function (req,res,next){
   res.json({status:'success',msg:'request /user/test'});
-})
+});
+app.use(router);
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use(session({
     //secure: true,
   },
 }));
+
 
 
 //设置跨域并清除缓存
