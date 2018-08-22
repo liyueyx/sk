@@ -31,7 +31,7 @@ const upload = multer({ storage: storage  });
  * 登录
  * */
 router.post('/login', (req, res, next) => {
-
+  console.log('this user name is : %s; this pass is %s', req.body.username, req.body.pass);
   if(req.body.username === 'admin' && req.body.pass === 'admin123'){
     let user = {
       id:'1',
