@@ -86,7 +86,7 @@ app.use(function (req,res,next) {
 router.get('/user/test',function (req,res,next){
   res.json({status:'success',msg:'request /user/test'});
 });
-router.get('/user/test1',function (req,res,next){
+router.post('/user/test1',function (req,res,next){
   res.json({status:'success',msg:'request /user/test1'});
 });
 console.log(router);
@@ -129,7 +129,8 @@ var noIntercept = (url)=>{
     '/user/logout',
     '/user/checklogin',
     '/user/register',
-    '/user/test'
+    '/user/test',
+    '/user/test1'
 
   ];
   if(addr.indexOf(url) != -1){
