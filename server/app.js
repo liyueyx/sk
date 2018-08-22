@@ -83,9 +83,6 @@ app.use(function (req,res,next) {
   }
 });
 
-app.use('/', indexRouter);
-app.use('/user', usersRouter);
-
 router.get('/user/test',function (req,res,next){
   res.json({status:'success',msg:'request /user/test'});
 });
@@ -93,6 +90,10 @@ router.get('/user/test1',function (req,res,next){
   res.json({status:'success',msg:'request /user/test1'});
 });
 app.use(router);
+app.use('/', indexRouter);
+app.use('/user', usersRouter);
+
+
 
 
 // catch 404 and forward to error handler
