@@ -74,11 +74,12 @@ app.use(function (req,res,next) {
     if(noIntercept(req.originalUrl)){
       next();
     }else{
-      res.json({
+      next();
+      /*res.json({
         status:'not-logged-in',
         msg:'当前未登录',
         result:''
-      });
+      });*/
     }
   }
 });
