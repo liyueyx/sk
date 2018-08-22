@@ -32,7 +32,7 @@ const upload = multer({ storage: storage  });
  * */
 router.post('/login', (req, res, next) => {
 
-  /*if(req.body.username === 'admin' && req.body.pass === 'admin123'){
+  if(req.body.username === 'admin' && req.body.pass === 'admin123'){
     let user = {
       id:'1',
       username: 'admin',
@@ -45,9 +45,9 @@ router.post('/login', (req, res, next) => {
   }
   else {
     res.json({status: 'error', msg: '账号或密码错误'})// 若登录失败，重定向到登录页面
-  }*/
+  }
 
-  userDao.getUserByTelephone(req.body.telephone, (err, result) => {
+  /*userDao.getUserByTelephone(req.body.telephone, (err, result) => {
     if(err){
       res.json({status:'error', msg:'查询数据错误'});
     }
@@ -63,7 +63,7 @@ router.post('/login', (req, res, next) => {
     }else{
       res.json({status:'error', msg:'用户名或密码错误'});
     }
-  });
+  });*/
 });
 
 /**
