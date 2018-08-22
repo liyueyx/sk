@@ -11,13 +11,13 @@ const ejs = require('ejs')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const router = express.Router();
-router.get('/user/test',function (req,res,next){
-  res.json({status:'success',msg:'request /user/test'});
-});
 
 
 const app = express();
-app.use(router);
+
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -85,6 +85,14 @@ app.use(function (req,res,next) {
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+
+router.get('/user/test',function (req,res,next){
+  res.json({status:'success',msg:'request /user/test'});
+});
+router.get('/user/test1',function (req,res,next){
+  res.json({status:'success',msg:'request /user/test1'});
+});
+app.use(router);
 
 
 // catch 404 and forward to error handler
