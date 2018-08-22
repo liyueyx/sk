@@ -89,6 +89,11 @@ router.get('/user/test',function (req,res,next){
 router.get('/user/test1',function (req,res,next){
   res.json({status:'success',msg:'request /user/test1'});
 });
+console.log(router);
+console.log('============');
+console.log(indexRouter);
+console.log('------------');
+console.log(usersRouter);
 app.use(router);
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
