@@ -10,14 +10,8 @@ const ejs = require('ejs')
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const router = express.Router();
-
 
 const app = express();
-
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -84,23 +78,8 @@ app.use(function (req,res,next) {
   }
 });
 
-router.get('/user/test',function (req,res,next){
-  res.json({status:'success',msg:'request /user/test'});
-});
-router.post('/user/test1',function (req,res,next){
-  res.json({status:'success',msg:'request /user/test1'});
-});
-console.log(router);
-console.log('============');
-console.log(indexRouter);
-console.log('------------');
-console.log(usersRouter);
-app.use(router);
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -131,9 +110,6 @@ var noIntercept = (url)=>{
     '/user/checklogin',
     '/user/register',
     '/user/test',
-    '/user/test1',
-    '/user/test2'
-
   ];
   if(addr.indexOf(url) != -1){
     flag = true;
