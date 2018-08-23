@@ -179,7 +179,7 @@ router.put('/pass', (req, res, next)=>{
 /**
  * 测试
  * */
-router.post('/test2', (req, res, next) => {
+router.post('/test', (req, res, next) => {
   /*let sql = 'select * from users';
   let param = [];
   db.query(sql, param, (err, rows, fields) => {
@@ -200,7 +200,7 @@ router.post('/test2', (req, res, next) => {
   /*userDao.getUserByName('admin',(err,rows) => {
     res.json({status:'success'});
   })*/
-  res.json({status:'success',msg:'test3 success return!'});
+  res.json({status:'success',msg:'test success return!'});
 });
 module.exports = router;
 
