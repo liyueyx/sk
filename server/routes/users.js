@@ -46,7 +46,7 @@ router.post('/login', (req, res, next) => {
   else {
     res.json({status: 'error', msg: '账号或密码错误'})// 若登录失败，重定向到登录页面
   }*/
-
+  console.log('telephone:%s,pass:%s',req.body.telephone,req.body.pass);
   userDao.getUserByTelephone(req.body.telephone, (err, result) => {
     if(err){
       res.json({status:'error', msg:'查询数据错误'});
