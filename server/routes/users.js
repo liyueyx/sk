@@ -50,6 +50,7 @@ router.post('/login', (req, res, next) => {
   userDao.getUserByTelephone(req.body.telephone, (err, result) => {
     if(err){
       res.json({status:'error', msg:'查询数据错误'});
+      return;
     }
     if(result &&　req.body.telephone === result.telephone && md5(req.body.pass) === result.pass){
       let user = {
@@ -60,8 +61,10 @@ router.post('/login', (req, res, next) => {
       }
       req.session.userInfo = user;
       res.json({status:'success', msg:'', result:user});
+      return;
     }else{
       res.json({status:'error', msg:'用户名或密码错误'});
+      return;
     }
   });
 });
