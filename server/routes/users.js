@@ -200,7 +200,11 @@ router.post('/test', (req, res, next) => {
   /*userDao.getUserByName('admin',(err,rows) => {
     res.json({status:'success'});
   })*/
-  res.json({status:'success',msg:'test success return!'});
+  //res.json({status:'success',msg:'test success return!'});
+  let username = req.body.username;
+  let pass = req.body.pass;
+  console.log('this username:%s,pass:%s',username,pass);
+  res.json({username:username,pass:pass})
 });
 module.exports = router;
 
