@@ -6,6 +6,7 @@ import axios from 'axios';
 axios.defaults.withCredentials=true;
 axios.defaults.timeout = 1000*60*30;
 axios.defaults.baseURL ='';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 //axios.defaults.baseURL ='http:127.0.0.1:3000';
 
 //http request 拦截器
