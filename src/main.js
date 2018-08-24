@@ -9,9 +9,6 @@ import axios from './utils/axiosInterceptors'
 import Vuex from  'vuex'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/base.css'
-axios.defaults.baseURL = '';
-//axios.defaults.baseURL = 'http://47.104.210.56:3000';
-//axios.defaults.baseURL = 'http://47.104.210.56:3000';
 Vue.prototype.$axios = axios;
 Vue.use(Vuex);
 Vue.use(ElementUI);

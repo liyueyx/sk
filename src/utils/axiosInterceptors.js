@@ -3,11 +3,12 @@
  */
 import emitter from './Emitter'
 import axios from 'axios';
+import {baseURL} from '../config';
 axios.defaults.withCredentials=true;
 axios.defaults.timeout = 1000*60*30;
-axios.defaults.baseURL ='';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-//axios.defaults.baseURL ='http:127.0.0.1:3000';
+//axios.defaults.baseURL = '';
+axios.defaults.baseURL = baseURL;
+//axios.defaults.baseURL ='http://127.0.0.1:3000';
 
 //http request 拦截器
 /*axios.interceptors.request.use(

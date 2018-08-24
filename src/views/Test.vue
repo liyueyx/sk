@@ -6,7 +6,7 @@
                  class="upload-demo"
                  ref="upload"
                  name="imageFile"
-                 action="http://127.0.0.1:3000/user/upload/authentication"
+                 action="/user/upload/authentication"
                  :on-preview="handlePreview"
                  :on-remove="handleRemove"
                  :file-list="fileList"
@@ -23,9 +23,11 @@
 
 <script>
   import NavHeader from '../components/NavHeader.vue'
+  import {baseURL} from '../config'
   export default {
     data () {
       return {
+        baseURL:baseURL,
         fileList: []
       }
     },

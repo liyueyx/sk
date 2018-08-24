@@ -31,22 +31,6 @@ const upload = multer({ storage: storage  });
  * 登录
  * */
 router.post('/login', (req, res, next) => {
-  /*console.log('this user name is : %s; this pass is %s', req.body.username, req.body.pass);
-  if(req.body.username === 'admin' && req.body.pass === 'admin123'){
-    let user = {
-      id:'1',
-      username: 'admin',
-      level: 1
-    };
-    req.session.userInfo = user
-    res.json({
-      status: 'success', msg: '', result:user
-    })
-  }
-  else {
-    res.json({status: 'error', msg: '账号或密码错误'})// 若登录失败，重定向到登录页面
-  }*/
-  console.log('telephone:%s,pass:%s',req.body.telephone,req.body.pass);
   userDao.getUserByTelephone(req.body.telephone, (err, result) => {
     if(err){
       res.json({status:'error', msg:'查询数据错误'});
@@ -207,7 +191,7 @@ router.post('/test', (req, res, next) => {
   let username = req.body.username;
   let pass = req.body.pass;
   console.log('this username:%s,pass:%s',username,pass);
-  res.json({username:username,pass:pass})
+  res.json({status:'success',msg:'this test return!',username:username,pass:pass})
 });
 module.exports = router;
 

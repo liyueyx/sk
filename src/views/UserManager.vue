@@ -4,6 +4,7 @@
       <div class="content">
          <el-table :data="userList" stripe style="width: 100%">
             <el-table-column prop="username" label="用户名" width="180"></el-table-column>
+            <el-table-column prop="telephone" label="手机"></el-table-column>
             <el-table-column prop="email" label="E-mail"></el-table-column>
             <el-table-column prop="province" label="省份"></el-table-column>
             <el-table-column prop="city" label="城市"></el-table-column>

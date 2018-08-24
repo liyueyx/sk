@@ -40,7 +40,8 @@ app.use(session({
 
 //设置跨域并清除缓存
 app.all('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  //res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://localhost:8080");
   res.header('Access-Control-Allow-Credentials', true);// Allow Cookie
   res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
@@ -52,8 +53,8 @@ app.all('*', function(req, res, next) {
 });
 
 
-//app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+/*app.use(express.json());
+app.use(express.urlencoded({ extended: false }));*/
 
 
 //登录拦截
@@ -68,12 +69,11 @@ app.use(function (req,res,next) {
     if(noIntercept(req.originalUrl)){
       next();
     }else{
-      next();
-      /*res.json({
+      res.json({
         status:'not-logged-in',
         msg:'当前未登录',
         result:''
-      });*/
+      });
     }
   }
 });

@@ -32,7 +32,7 @@
     methods: {
       test: function (){
         let param = {}
-        this.$axios.get('/user/test',param).then((res)=>{
+        this.$axios.post('/user/test',param).then((res)=>{
           console.log(JSON.stringify(res));
         });
       },
