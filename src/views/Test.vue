@@ -6,7 +6,7 @@
                  class="upload-demo"
                  ref="upload"
                  name="imageFile"
-                 action="/user/upload/authentication"
+                 :action="action()"
                  :on-preview="handlePreview"
                  :on-remove="handleRemove"
                  :file-list="fileList"
@@ -27,7 +27,6 @@
   export default {
     data () {
       return {
-        baseURL:baseURL,
         fileList: []
       }
     },
@@ -40,6 +39,9 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+      action(){
+        return baseURL + '/user/upload/authentication';
       }
     },
     components:{
