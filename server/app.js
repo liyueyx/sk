@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -5,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const createError = require('http-errors');
-const ejs = require('ejs')
+const ejs = require('ejs');
 
 
 const indexRouter = require('./routes/index');
@@ -18,7 +19,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('.html',ejs.__express)
 app.set('view engine', 'html');
 
-app.use(logger('dev'));   //设置日志
+var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
+app.use(logger('combined', {stream: accessLogStream}));   //设置日志
 
 app.use(bodyParser.json()); // 使用bodyparder中间件
 app.use(bodyParser.urlencoded({ extended: true })); //可

@@ -11,6 +11,7 @@ var storage = multer.diskStorage({
     if (!fs.existsSync(dist)) {
       fs.mkdirSync(dist);
     }
+    console.log('this:'+dist);
     cb(null, dist);
   },
   filename:(req, file, cb) => {

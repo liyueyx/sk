@@ -21,7 +21,7 @@
 </template>
 
 <script>
-   import {baseURL} from '../../config';
+  import {baseURL} from '../../config';
   export default {
     data () {
       return {
