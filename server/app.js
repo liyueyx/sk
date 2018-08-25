@@ -49,7 +49,6 @@ app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
   res.header("X-Powered-By",' 3.2.1')
 
-
   if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
   else  next();
 });
@@ -64,10 +63,10 @@ app.use(function (req,res,next) {
   let user = req.session.userInfo;
   console.log(JSON.stringify(user));
   if(user &&　user.id){
-    console.log('用户已经登录');
+    //console.log('用户已经登录');
     next();
   }else{
-    console.log('用户没有登录');
+    //console.log('用户没有登录');
     if(noIntercept(req.originalUrl)){
       next();
     }else{

@@ -8,10 +8,12 @@ const fs = require('fs');
 var storage = multer.diskStorage({
   destination:(req, file, cb) => {
     let dist = '/public/uploads/' + getUploadDirName();
+    console.log('this:'+dist);
+    console.log(!fs.existsSync(dist));
     if (!fs.existsSync(dist)) {
       fs.mkdirSync(dist);
     }
-    console.log('this:'+dist);
+
     cb(null, dist);
   },
   filename:(req, file, cb) => {
