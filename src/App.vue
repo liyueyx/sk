@@ -6,7 +6,7 @@
 </template>
 
 <script>
-let test = 'test';
+let test = 'test...';
 export default {
   name: 'App'
 }
