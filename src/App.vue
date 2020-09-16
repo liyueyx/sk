@@ -7,7 +7,7 @@
 
 <script>
 let test = 'test';
-let ppst = 'ttsts';
+let ppst = 'ttsts'; 
 export default {
   name: 'App'
 }
