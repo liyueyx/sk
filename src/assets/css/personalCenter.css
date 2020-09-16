@@ -1,0 +1,119 @@
+.personal-nav .personal-info {
+    background-color: #F7F7F7;
+    padding: 20px;
+    border-bottom: 1px solid #EBEBEB;
+}
+.personal-nav .personal-info .avatar {
+    font-size: 18px;
+}
+.personal-nav .personal-info .avatar img {
+    float: left;
+    display: inline;
+    width: 83px;
+    height: 83px;
+    border: 1px solid #C2C2C2;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.personal-nav .personal-info .avatar span {
+    float: left;
+    display: inline-flex;
+    width: 135px;
+    margin-top: 30px;
+    height: 30px;
+    line-height: 36px;
+}
+
+.personal-nav .personal-info .avatar span i{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    font-style: normal;
+}
+.bronze-medal-20 {
+    /*background: url('../assets/img/head-portrait.jpg') no-repeat -47px 1px;*/
+}
+.gz-level {
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-top: 8px;
+    margin-left: 6px;
+}
+.personal-nav .personal-info .employ-info {
+    font-size: 16px;
+    padding-top: 10px;
+}
+.personal-nav .personal-info .employ-info p {
+    line-height: 30px;
+}
+.personal-nav .personal-info .avatar a {
+    color: #1989CB;
+    font-size: 14px;
+}
+.personal-nav .personal-info .employ-info em {
+    color: #E60012;
+}
+.personal-nav .personal-info .employ-info span {
+    float: right;
+    display: inline;
+}
+.personal-nav .personal-info .employ-info a {
+    color: #1989CB;
+    margin-right: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.person-credit table {
+    border-bottom: 1px solid #ebebeb;
+    font-size: 12px;
+}
+.person-credit table td, .person-credit table th {
+    border-right: 1px solid #ebebeb;
+}
+.person-credit table td {
+    color: #999999;
+}
+.page-view-div td, .page-view-div th {
+    padding: 10px 0;
+    text-align: center;
+    width: 100px;
+}
+element.style {
+}
+.person-credit table td, .person-credit table th {
+    border-right: 1px solid #ebebeb;
+}
+.person-credit table th {
+    color: #333333;
+    font-weight: bold;
+}
+.personal-nav .nav {
+    padding: 20px;
+    line-height: 30px;
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.personal-nav .nav dl {
+    margin-bottom: 15px;
+}
+.personal-nav .el-icon-tickets{
+    font-size: 22px;
+}
+.personal-nav .nav dt{
+    font-size: 20px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.personal-nav .nav .nav-ico2 {
+    color: #FE4E00;
+}
